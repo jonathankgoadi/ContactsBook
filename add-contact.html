@@ -7,29 +7,29 @@
   </head>
   <body>
     <div class="container">
-      <form id="edit-form" action="post">
+      <form id="edit-form">
         <h2>Add Contact</h2>
         <div class="form-group">
           <label for="firstname">First name</label>
-          <input id="name" type="text" />
+          <input id="name" name="firstname" type="text" />
         </div>
         <div class="form-group">
           <label for="lastname">Last name</label>
-          <input id="lastname" type="text" />
+          <input id="lastname" name="lastname" type="text" />
         </div>
         <div class="form-group">
           <label for="mobile">Mobile</label>
-          <input id="mobile" type="text" />
+          <input id="mobile" name="mobile" type="text" />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" />
+          <input type="email" name="email" id="email" />
         </div>
         <div class="form-group">
           <label for="avatar">Select a file</label>
-          <input type="file" id="avatar" />
+          <input type="file" name="avatar" id="avatar" />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" id="submitForm">Submit</button>
       </form>
       <button type="button">Home</button>
     </div>
