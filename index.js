@@ -19,21 +19,23 @@ function renderContacts(contacts) {
   contacts_h.innerHTML = html;
 }
 
-// document.getElementById("refresh").addEventListener("click", fetchContacts);
+document.querySelector("#refresh")?.addEventListener("click", fetchContacts);
+document.getElementById("add-contact")?.addEventListener("click", () => {
+  window.open("add-contact.html", "_self");
+});
 
 // ========================================================================================
 // ADD-CONTACTS
 // ========================================================================================
-document.getElementById("submitForm").addEventListener("click", submitForm);
+document.getElementById("submitForm")?.addEventListener("click", submitForm);
+document.getElementById("homeBtn")?.addEventListener("click", homeLink);
+
 function submitForm(e) {
   e.preventDefault();
 
   const form = document.querySelector("#edit-form");
   const formData = new FormData(form);
   formData.append("apiKey", apiKey);
-  for (const element of formData.values()) {
-    console.log(element);
-  }
 
   fetch(rootPath + "controller/insert-contact/", {
     method: "POST",
@@ -44,11 +46,14 @@ function submitForm(e) {
     .then((data) => {
       if (data === "1") {
         alert("contact added");
-        window.open("index.html", "_self");
+        homeLink();
       } else {
         alert(data);
-        window.open("index.html", "_self");
+        homeLink();
       }
     })
     .catch();
+}
+function homeLink() {
+  window.open("index.html", "_self");
 }
