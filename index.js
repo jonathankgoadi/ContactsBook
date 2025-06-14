@@ -6,12 +6,12 @@ function fetchContacts() {
 function renderContacts(contacts) {
   html = `<table>`;
   for (const key in contacts) {
-    html += `<tr>
+    html += `<tr onclick="editContact(${contacts[key].id})">
         <td><img src=${
           rootPath + "controller/uploads/" + contacts[key]["avatar"]
         }/><td>
-        <td><h5>${contacts[key]["firstname"]}</h5><td>
-        <td><h5>${contacts[key]["lastname"]}</h5><td>              
+        <td><h5>${contacts[key].firstname}</h5><td>
+        <td><h5>${contacts[key].lastname}</h5><td>              
      </tr>`;
   }
   html += `</table>`;
@@ -28,7 +28,7 @@ document.getElementById("add-contact")?.addEventListener("click", () => {
 // ADD-CONTACTS
 // ========================================================================================
 document.getElementById("submitForm")?.addEventListener("click", submitForm);
-document.getElementById("homeBtn")?.addEventListener("click", homeLink);
+document.querySelector("homeBtn")?.addEventListener("click", homeLink);
 
 function submitForm(e) {
   e.preventDefault();
@@ -56,4 +56,17 @@ function submitForm(e) {
 }
 function homeLink() {
   window.open("index.html", "_self");
+}
+// ============================================================================
+// EDIT CONTACT
+// ============================================================================
+function editContact(id) {
+  window.open("edit-contact.html?id=" + id, "_self");
+}
+const id = getId();
+
+function getId() {
+  const url = window.location.href;
+  const id = url.split("=")[1];
+  return id;
 }
