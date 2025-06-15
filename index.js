@@ -8,8 +8,8 @@ function renderContacts(contacts) {
   for (const key in contacts) {
     html += `<tr onclick="editContact(${contacts[key].id})">
         <td><img src=${
-          rootPath + "controller/uploads/" + contacts[key]["avatar"]
-        }/><td>
+          rootPath + "controller/uploads/" + contacts[key].avatar
+        }><td>
         <td><h5>${contacts[key].firstname}</h5><td>
         <td><h5>${contacts[key].lastname}</h5><td>              
      </tr>`;
