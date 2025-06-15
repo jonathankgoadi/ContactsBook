@@ -1,28 +1,27 @@
-function fetchContacts() {
-  fetch(rootPath + "/controller/get-contacts/")
-    .then((response) => response.json())
-    .then((data) => renderContacts(data));
-}
-function renderContacts(contacts) {
-  html = `<table>`;
-  for (const key in contacts) {
-    html += `<tr onclick="editContact(${contacts[key].id})">
-        <td><img src=${
-          rootPath + "controller/uploads/" + contacts[key].avatar
-        }><td>
-        <td><h5>${contacts[key].firstname}</h5><td>
-        <td><h5>${contacts[key].lastname}</h5><td>              
-     </tr>`;
-  }
-  html += `</table>`;
-  const contacts_h = document.getElementById("contacts");
-  contacts_h.innerHTML = html;
-}
+// function fetchContacts() {
+//   fetch(rootPath + "/controller/get-contacts/")
+//     .then((response) => response.json())
+//     .then((data) => renderContacts(data));
+// }
+// function renderContacts(contacts) {
+//   html = `<table>`;
+//   for (const key in contacts) {
+//     html += `<tr onclick="editContact(${contacts[key].id})">
+//         <td><img src=${
+//           rootPath + "controller/uploads/" + contacts[key].avatar
+//         }><td>
+//         <td><h5>${contacts[key].firstname}</h5><td>
+//         <td><h5>${contacts[key].lastname}</h5><td>
+//      </tr>`;
+//   }
+//   html += `</table>`;
+//   document.getElementById("contacts").innerHTML = html;
+// }
 
-document.querySelector("#refresh")?.addEventListener("click", fetchContacts);
-document.getElementById("add-contact")?.addEventListener("click", () => {
-  window.open("add-contact.html", "_self");
-});
+// document.querySelector("#refresh")?.addEventListener("click", fetchContacts);
+// document.getElementById("add-contact")?.addEventListener("click", () => {
+//   window.open("add-contact.html", "_self");
+// });
 
 // ========================================================================================
 // ADD-CONTACTS
@@ -60,6 +59,7 @@ function homeLink() {
 // ============================================================================
 // EDIT CONTACT
 // ============================================================================
+
 function editContact(id) {
   window.open("edit-contact.html?id=" + id, "_self");
 }
@@ -69,4 +69,10 @@ function getId() {
   const url = window.location.href;
   const id = url.split("=")[1];
   return id;
+}
+
+function getContact() {
+  fetch(rootPath + "/controller/get-contacts/?id=" + id)
+    .then((response) => response.json())
+    .then((data) => renderContact(data));
 }

@@ -35,6 +35,39 @@
     </div>
 
     <script src="config.js"></script>
-    <script src="index.js" defer></script>
+    <script>
+      document
+        .getElementById("submitForm")
+        .addEventListener("click", submitForm);
+      document.querySelector("homeBtn").addEventListener("click", homeLink);
+
+      function submitForm(e) {
+        e.preventDefault();
+
+        const form = document.querySelector("#edit-form");
+        const formData = new FormData(form);
+        formData.append("apiKey", apiKey);
+
+        fetch(rootPath + "controller/insert-contact/", {
+          method: "POST",
+          headers: { accept: "application/json, *.*" },
+          body: formData,
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            if (data === "1") {
+              alert("contact added");
+              homeLink();
+            } else {
+              alert(data);
+              homeLink();
+            }
+          });
+      }
+
+      function homeLink() {
+        window.open("index.html", "_self");
+      }
+    </script>
   </body>
 </html>

@@ -14,6 +14,36 @@
       <button type="button" id="add-contact">Add Contact</button>
     </div>
     <script src="config.js"></script>
-    <script src="index.js" defer></script>
+    <script>
+      function fetchContacts() {
+        fetch(rootPath + "/controller/get-contacts/")
+          .then((response) => response.json())
+          .then((data) => renderContacts(data));
+      }
+      function renderContacts(contacts) {
+        html = `<table>`;
+        for (const key in contacts) {
+          html += `<tr onclick="editContact(${contacts[key].id})">
+        <td><img src=${
+          rootPath + "controller/uploads/" + contacts[key].avatar
+        }><td>
+        <td><h5>${contacts[key].firstname}</h5><td>
+        <td><h5>${contacts[key].lastname}</h5><td>              
+     </tr>`;
+        }
+        html += `</table>`;
+        document.getElementById("contacts").innerHTML = html;
+      }
+      function editContact(id) {
+        window.open("edit-contact.html?id=" + id, "_self");
+      }
+
+      document
+        .querySelector("#refresh")
+        .addEventListener("click", fetchContacts);
+      document.getElementById("add-contact").addEventListener("click", () => {
+        window.open("add-contact.html", "_self");
+      });
+    </script>
   </body>
 </html>

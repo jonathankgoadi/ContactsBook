@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Contact</title>
   </head>
-  <body>
+  <body onload="getContact()">
     <div class="container">
-      <form id="edit-form">
+      <form id="editForm">
         <h2>Edit Contact</h2>
         <div id="profile"></div>
         <div class="form-group">
@@ -26,9 +26,9 @@
           <label for="email">Email</label>
           <input name="email" type="email" id="email" readonly />
         </div>
-        <div class="form-group">
-          <label for="avatar" hidden>Change profile picture </label>
-          <input type="file" name="avatar" id="avatar" hidden />
+        <div class="form-group" id="selectAvator" hidden>
+          <label for="avatar">Change profile picture </label><br />
+          <input type="file" name="avatar" id="avatar" />
         </div>
 
         <button type="submit" id="submitForm" hidden>Submit</button>
@@ -39,6 +39,80 @@
       <button type="button" id="deleteContact">Delete</button>
     </div>
     <script src="config.js"></script>
-    <script src="index.js" defer></script>
+    <script>
+      document.getElementById("homeBtn").addEventListener("click", homeLink);
+
+      const id = getId();
+
+      function getId() {
+        const url = window.location.href;
+        const id = url.split("=")[1];
+        return id;
+      }
+
+      function homeLink() {
+        window.open("index.html", "_self");
+      }
+
+      function getContact() {
+        try {
+          fetch(rootPath + "/controller/get-contacts/?id=" + id)
+            .then((response) => response.json())
+            .then((data) => renderContact(data));
+        } catch (error) {
+          console.log("error" + error);
+        }
+      }
+
+      function renderContact(data) {
+        const avatarImg = `<img src="${rootPath}/controller/uploads/${data[0].avatar}">`;
+        document.getElementById("profile").innerHTML = avatarImg;
+        document.getElementById("firstname").value = data[0].firstname;
+        document.getElementById("lastname").value = data[0].lastname;
+        document.getElementById("mobile").value = data[0].mobile;
+        document.getElementById("email").value = data[0].email;
+      }
+
+      document
+        .getElementById("editContact")
+        .addEventListener("click", editContact);
+
+      function editContact() {
+        document.getElementById("firstname").readOnly = false;
+        document.getElementById("lastname").readOnly = false;
+        document.getElementById("mobile").readOnly = false;
+        document.getElementById("email").readOnly = false;
+
+        document.getElementById("selectAvator").hidden = false;
+        document.getElementById("submitForm").hidden = false;
+      }
+
+      document
+        .getElementById("submitForm")
+        .addEventListener("click", updateContact);
+
+      function updateContact() {
+        const form = document.querySelector("#editForm");
+        const data = new FormData(form);
+        data.append("id", id);
+        data.append("apiKey", apiKey);
+
+        fetch(rootPath + "controller/edit-contact/", {
+          method: "POST",
+          headers: { accept: "application/json, *.*" },
+          body: data,
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            if (data === "1") {
+              alert("contact updated");
+              homeLink();
+            } else {
+              alert(data);
+              homeLink();
+            }
+          });
+      }
+    </script>
   </body>
 </html>
