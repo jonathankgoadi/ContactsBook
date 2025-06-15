@@ -113,6 +113,27 @@
             }
           });
       }
+
+      document
+        .getElementById("deleteContact")
+        .addEventListener("click", deleteContact);
+      function deleteContact() {
+        const confirmDelete = confirm("Delete Contact. Are You Sure?");
+
+        if (confirmDelete) {
+          fetch(rootPath + "/controller/delete-contact/?id=" + id)
+            .then((response) => response.text())
+            .then((data) => {
+              if (data === "1") {
+                alert("Contact Deleted");
+                homeLink();
+              } else {
+                alert(data);
+                homeLink();
+              }
+            });
+        }
+      }
     </script>
   </body>
 </html>
