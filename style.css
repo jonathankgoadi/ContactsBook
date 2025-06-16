@@ -1,5 +1,5 @@
 body {
-  color: #222;
+  /* color: #222; */
   font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
   line-height: 1.5;
 }
@@ -24,12 +24,8 @@ table {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 5rem;
   padding-bottom: 60px;
-}
-
-#editForm,
-#edit-form {
-  width: 30%;
 }
 
 .contacts-table {
@@ -40,10 +36,17 @@ table {
   color: blue;
   font-size: 120%;
 }
+.btn-primary {
+  margin-right: 1rem;
+}
 
 .navbar {
   height: 50px;
 }
-td {
-  text-transform: capitalize;
+
+@media screen and (min-width: 1200px) {
+  #editForm,
+  #edit-form {
+    width: 30%;
+  }
 }

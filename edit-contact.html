@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +12,7 @@
     <title>Edit Contact</title>
   </head>
   <body onload="getContact()">
-    <nav class="navbar bg-body-tertiary" style="margin-bottom: 2rem">
+    <nav class="navbar fixed-top bg-body-tertiary" style="margin-bottom: 2rem">
       <div class="container-fluid justify-content-center">
         <a class="navbar-brand" href="#">Edit Contact</a>
       </div>
@@ -21,7 +21,7 @@
     <div class="flex-container">
       <div id="profile" class="mb-3 rounded mx-auto d-block"></div>
 
-      <form id="editForm">
+      <form id="editForm" class="container">
         <div class="form mb-3">
           <label for="firstname">First name</label>
           <input
@@ -74,14 +74,17 @@
         <button type="submit" id="submitForm" class="btn btn-primary" hidden>
           Submit</button
         ><br /><br />
-
-        <button type="button" id="homeBtn" class="btn btn-primary">Home</button>
-        <button type="button" id="editContact" class="btn btn-primary">
-          Edit
-        </button>
-        <button type="button" id="deleteContact" class="btn btn-primary">
-          Delete
-        </button>
+        <div class="buttons">
+          <button type="button" id="homeBtn" class="btn btn-primary">
+            Home
+          </button>
+          <button type="button" id="editContact" class="btn btn-primary">
+            Edit
+          </button>
+          <button type="button" id="deleteContact" class="btn btn-primary">
+            Delete
+          </button>
+        </div>
       </form>
     </div>
 
