@@ -7,7 +7,7 @@
   </head>
   <body onload="getContact()">
     <div class="container">
-      <form id="editForm">
+      <form id="editForm" method="post">
         <h2>Edit Contact</h2>
         <div id="profile"></div>
         <div class="form-group">
@@ -55,13 +55,11 @@
       }
 
       function getContact() {
-        try {
-          fetch(rootPath + "/controller/get-contacts/?id=" + id)
-            .then((response) => response.json())
-            .then((data) => renderContact(data));
-        } catch (error) {
-          console.log("error" + error);
-        }
+        console.log(id);
+
+        fetch(rootPath + "/controller/get-contacts/?id=" + id)
+          .then((response) => response.json())
+          .then((data) => renderContact(data));
       }
 
       function renderContact(data) {
@@ -91,7 +89,9 @@
         .getElementById("submitForm")
         .addEventListener("click", updateContact);
 
-      function updateContact() {
+      function updateContact(e) {
+        e.preventDefault();
+
         const form = document.querySelector("#editForm");
         const data = new FormData(form);
         data.append("id", id);
@@ -125,7 +125,6 @@
             .then((response) => response.text())
             .then((data) => {
               if (data === "1") {
-                alert("Contact Deleted");
                 homeLink();
               } else {
                 alert(data);
