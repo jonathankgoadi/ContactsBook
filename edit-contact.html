@@ -21,7 +21,7 @@
     <div class="flex-container">
       <div id="profile" class="mb-3 rounded mx-auto d-block"></div>
 
-      <form id="editForm" method="post">
+      <form id="editForm">
         <div class="form mb-3">
           <label for="firstname">First name</label>
           <input
@@ -137,7 +137,7 @@
         .getElementById("submitForm")
         .addEventListener("click", updateContact);
 
-      function updateContact(e) {
+      function updateContact() {
         // e.preventDefault();
 
         const form = document.querySelector("#editForm");
